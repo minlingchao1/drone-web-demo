@@ -1,7 +1,6 @@
 ### CICD WEB-TEST DEMO
 
-Needed Build Status...
-
+[![Build Status](http://10.2.16.8:30707/api/badges/hor/webdemo/status.svg)](http://10.2.16.8:30707/hor/webdemo)
 
 #### PreRequest
 
@@ -49,7 +48,7 @@ pipeline:
     image: neunnsy/docker
     registry: index.neunn.com
     username: admin
-    password: WWW.163.com
+    password: <your password here>
     repo: index.neunn.com/library/webdemo
     tag: 0.1.${DRONE_BUILD_NUMBER}
     file: Dockerfile

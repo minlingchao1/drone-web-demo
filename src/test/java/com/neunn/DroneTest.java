@@ -9,18 +9,23 @@ package com.neunn;/*
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-public class Drone {
+import static org.junit.Assert.*;
 
-    public String getMessage(boolean bigger) {
-        if (bigger) {
-            return "Hello Universe!";
-        } else {
-            return "Hello World!";
-        }
+import org.junit.Before;
+import org.junit.Test;
+
+public class DroneTest {
+
+    private Drone subject;
+
+    @Before
+    public void setup() {
+        subject = new Drone();
     }
 
-    public static void main(String args[]) {
-        System.out.println("This is Drone Java Maven Web Demo...");
+    @Test
+    public void testGetMessage() {
+        assertEquals("Hello World!", subject.getMessage(false));
     }
 
 }

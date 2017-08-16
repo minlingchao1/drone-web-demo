@@ -6,6 +6,8 @@ pipeline:
     image: neunnsy/maven3-jdk-7:v1.0.0
     commands:
       - mvn package
+      - mvn site
+      - mvn cobertura:cobertura
   publish-master:
     image: neunnsy/docker
     registry: index.neunn.com
