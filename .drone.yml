@@ -8,11 +8,15 @@ pipeline:
       - mvn package
       - mvn site
       - mvn cobertura:cobertura
+      - mvn checkstyle:checkstyle
+      - mvn jxr:jxr
+    volumes:
+      - /root/.m2:/root/.m2
   publish-master:
-    image: neunnsy/docker
+    image: neunnsy/docker:v0.0.1
     registry: index.neunn.com
     username: admin
-    password: WWW.163.com
+    password: 12345678
     repo: index.neunn.com/library/webdemo
     tag: 0.1.${DRONE_BUILD_NUMBER}
     file: Dockerfile
@@ -25,10 +29,10 @@ pipeline:
       branch: master
       status: [ success ]
   publish-dev:
-    image: neunnsy/docker
+    image: neunnsy/docker:v0.0.1
     registry: index.neunn.com
     username: admin
-    password: WWW.163.com
+    password: 12345678
     repo: index.neunn.com/library/webdemo
     tag: 0.1.${DRONE_BUILD_NUMBER}
     file: Dockerfile
@@ -56,3 +60,12 @@ pipeline:
     when:
       branch: dev
       status: [ success ]
+  notify:
+    image: drillster/drone-email
+    from: crazy_invoker@sina.com
+    host: smtp.sina.com
+    port: 25
+    username: crazy_invoker
+    password: woaiwenwen0708
+    recipients:
+      - zhaozy@neunn.com

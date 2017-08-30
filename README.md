@@ -28,11 +28,13 @@ pipeline:
     image: neunnsy/maven3-jdk-7:v1.0.0
     commands:
       - mvn package
+      - mvn site
+      - mvn cobertura:cobertura
   publish-master:
     image: neunnsy/docker
     registry: index.neunn.com
     username: admin
-    password: WWW.163.com
+    password: <your password here>
     repo: index.neunn.com/library/webdemo
     tag: 0.1.${DRONE_BUILD_NUMBER}
     file: Dockerfile
@@ -48,7 +50,7 @@ pipeline:
     image: neunnsy/docker
     registry: index.neunn.com
     username: admin
-    password: <your password here>
+    password: WWW.163.com
     repo: index.neunn.com/library/webdemo
     tag: 0.1.${DRONE_BUILD_NUMBER}
     file: Dockerfile
@@ -139,3 +141,15 @@ echo [ your k8s base64 encoded token ] | base64 -d && echo''
 ```
 kubectl create clusterrolebinding default --clusterrole cluster-admin --serviceaccount=default:default
 ```
+
+#### Test Report & Code-Cover Report
+
+Test Report: visit `http://10.2.16.8:30126/site/surefire-report.html`
+
+Code-Cover Report: visit `http://10.2.16.8:30126/site/cobertura/project-reports.html`
+
+Check-Style Report: visit `http://10.2.16.8:30126/site/checkstyle.html`
+
+#### WebApp
+
+Web App: visit `http://10.2.16.8:30126/webdemo`
